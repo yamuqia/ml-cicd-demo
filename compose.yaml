@@ -1,0 +1,20 @@
+services:
+  ml-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ml-cicd-demo:0.1
+    container_name: ml-api
+    ports:
+      - "8080:8000"
+    restart: unless-stopped
+###
+# services：定义服务
+# ml-api：服务名
+# build.context：使用当前目录构建镜像
+# build.dockerfile：使用 Dockerfile 构建
+# image：构建后的镜像名
+# container_name：容器名
+# ports：端口映射
+# restart：容器异常退出后的重启策略
+###
