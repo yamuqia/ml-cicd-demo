@@ -1,6 +1,6 @@
 services:
   ml-api:
-    image: ghcr.io/yamqia/ml-cicd-demo:main
+    image: ghcr.io/yamuqia/ml-cicd-demo:main
     container_name: ml-api
     ports:
       - "8080:8000"
