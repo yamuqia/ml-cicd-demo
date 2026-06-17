@@ -72,7 +72,7 @@ jobs:
             ${{ env.IMAGE_NAME_LOWER }}:main
             ${{ env.IMAGE_NAME_LOWER }}:${{ github.sha }}
   deploy:
-    needs: build-and-push
+    needs: test-build-push
     if: github.event_name == 'push'
     runs-on: [self-hosted, linux, x64, ml-cd]
 
