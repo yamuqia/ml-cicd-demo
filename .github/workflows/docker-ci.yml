@@ -79,7 +79,7 @@ jobs:
     steps:
       - name: Deploy with local script
         run: |
-          cd ~/projects/ml-cicd-demo
+          cd ~/workspace/ml-cicd-demo
           git fetch origin main
           git reset --hard origin/main
           ./scripts/deploy_compose.sh
