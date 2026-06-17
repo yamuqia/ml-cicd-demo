@@ -1,0 +1,7 @@
+services:
+  ml-api:
+    image: ghcr.io/yamqia/ml-cicd-demo:main
+    container_name: ml-api
+    ports:
+      - "8080:8000"
+    restart: unless-stopped
