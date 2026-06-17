@@ -72,20 +72,14 @@ jobs:
             ${{ env.IMAGE_NAME_LOWER }}:main
             ${{ env.IMAGE_NAME_LOWER }}:${{ github.sha }}
   deploy:
-    needs: test-build-push
+    needs: build-and-push
     if: github.event_name == 'push'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, ml-cd]
 
     steps:
-      - name: Deploy to Ubuntu server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
-          script: |
-            cd ~/projects/ml-cicd-demo
-            docker compose -f compose.prod.yaml pull
-            docker compose -f compose.prod.yaml up -d
-            docker image prune -f
+      - name: Deploy with local script
+        run: |
+          cd ~/projects/ml-cicd-demo
+          git fetch origin main
+          git reset --hard origin/main
+          ./scripts/deploy_compose.sh
