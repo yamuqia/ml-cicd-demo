@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-$HOME/projects/ml-cicd-demo}"
+APP_DIR="${APP_DIR:-$HOME/workspace/ml-cicd-demo}"
 COMPOSE_FILE="${COMPOSE_FILE:-compose.prod.yaml}"
 HEALTH_URL="${HEALTH_URL:-http://127.0.0.1:8080/health}"
 
