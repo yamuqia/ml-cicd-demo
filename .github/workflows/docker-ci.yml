@@ -77,9 +77,20 @@ jobs:
     runs-on: [self-hosted, linux, x64, ml-cd]
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy with local script
+        env:
+          IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/ml-cicd-demo
         run: |
-          cd ~/workspace/ml-cicd-demo
-          git fetch origin main
-          git reset --hard origin/main
+          export IMAGE_NAME="${IMAGE_NAME,,}"
+          chmod +x ./scripts/deploy_compose.sh
           ./scripts/deploy_compose.sh
